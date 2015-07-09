@@ -1,0 +1,39 @@
+<!-- assessment.closer.handlebars -->
+<div class="cp-assessment-page-content">
+    <div class="row">
+       <div class="assessment-closer-wrapper">
+
+            <h2 class="result-message {{#if mastered}}mastered{{/if}}">
+                {{#if mastered}}<img src="images/icons/check-circle.svg" alt="Green check mark" title="Correct Answer"/>{{/if}}
+                <span class="result-text">{{resultMessage}}</span>
+            </h2>
+
+            <p class="your-grade">Your Score</p>
+            <p class="score-percent">{{scorePercent}}%</p>
+            <p class="score-points">Score {{points}}/{{totalPoints}} points</p>
+
+            <div class="horizontal-rule"/>
+
+            {{#unless mastered}}
+                <div class="closer-message alert alert-info" role="alert">
+                    <p>You have not mastered this assessment.  Please make sure to review your assessment to see how you did.</p>
+                </div>
+            {{/unless}}
+
+            <div class="review-button-wrapper">
+                <button type="button" class="review-button btn btn-lg btn-primary" title="Select to Review">Review Assessment</button>
+            </div>
+            
+            {{#unless isSingleAssessment}}
+                {{#unless isLastLO}}            
+                <div class="continue-button-wrapper">
+                    <button type="button" class="continue-button btn btn-default btn-sm" title="Continue Lesson">Continue Lesson</button>
+                </div>
+                {{/unless}}
+            {{/unless}}
+            
+        </div>
+    </div>
+
+</div>
+<!-- end of assessment.closer.handlebars -->
