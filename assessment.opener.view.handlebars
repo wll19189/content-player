@@ -1,0 +1,121 @@
+<!-- assessment.opener.view.handlebars -->
+<div class="cp-assessment-page-content">
+    <div class="container-fluid center-block">
+        <div class="row">
+		            <div class="col-md-7">
+		                <span><h2>Instructions</h2></span>
+		                <span class = "cp-opener-instruction">{{{openerText}}}</span>
+		                {{#unless isPreviewMode}}  
+							{{#if isAlreadyTaken}}
+								<div class = "col-md-12 attempt-content">
+					                <div class="row">
+					                    <div class="col-md-12 text-center attempt-main-title">
+					                        <h4>Attempt</h4>
+					                    </div>
+					                </div>
+					                <div class="row attempt-last-attempt {{#if attemptModel.hasPreviousAttempts}}space{{/if}}">
+					                    <div class="col-xs-12 col-md-4 score-container">
+					                        {{#if attemptModel.isMastered}}
+					                            <div class="mastered">
+					                                <p><img src="images/icons/check-circle.svg" alt="Mastered" title="Mastered"/> Mastered</p>
+					                            </div>
+					                        {{/if}}
+					                        <div class="percent"><p>{{attemptModel.scorePercent}}%</p></div>
+					                        <div class="points"><p>Score {{attemptModel.score}}/{{attemptModel.totalPoints}} points</p></div>
+					                    </div>
+					                    <div class="col-xs-12 col-md-8 button-container text-center">
+					                        <button data-attempt-id="{{attemptModel.attemptId}}" type="button" class="review-button btn btn-lg btn-primary" title="Select to review your assessment">Review Your Assessment</button>
+					                    </div>
+					                </div>
+					                
+					                {{#if attemptModel.hasPreviousAttempts}}
+						                <div class="row attempt-previous-attempts">
+						                    <div class="col-md-12 attempt-list-wrapper">
+						
+						                        <div class="answer-reveal">
+						                            <div class="panel-group" id="reveal-assessment-attempt-list">
+						                                <div class="panel panel-default">
+						                                    <div class="accordion-group">
+						                                        <button tabindex="0" data-toggle="collapse" data-target="#reveal-attempt-list-content" data-parent="#reveal-assessment-attempt-list"
+						                                           class="accordion-toggle" title="All Previous attempts"><span class="label label-default"><i class="glyphicon glyphicon-chevron-{{#if isListAttemptsExpanded}}down{{else}}right{{/if}}"></i></span>
+						                                            All Previous attempts
+						                                        </button>
+						                                    </div>
+						                                    <div id="reveal-attempt-list-content" class="panel-collapse collapse {{#if isListAttemptsExpanded}}in{{/if}} section-container">
+						                                        <div class="panel-body section-content">
+						                                            
+						                                            {{#each attemptModel.previousAttempts}}
+						
+						                                                <div class="row attempt-list-item">
+						                                                    <div class="col-md-2 col-item">
+						                                                        <div class="percent"><p>{{scorePercent}}%</p></div>
+						                                                    </div>
+						                                                    <div class="col-md-6 col-item">
+						                                                        <div class="points"><p>Score {{score}}/{{totalPoints}} points</p></div>
+						                                                        <div class="submit"><p>Submitted: {{getDatetimeFromTimestamp submitDate}}</p></div>                                                    
+						                                                    </div>
+						                                                    <div class="col-md-4 col-item text-center button-container">
+						                                                        <button data-attempt-id="{{attemptId}}" type="button" class="review-button btn btn-sm btn-primary" title="Select to review your assessment">Review Your Assessment</button>
+						                                                    </div>
+						                                                </div>
+						
+						                                                {{#unless isLastItem}}
+						                                                    <div class="div-line" />
+						                                                {{/unless}}
+						
+						                                            {{/each}}
+						                                                
+						                                        </div>
+						                                    </div>
+						                                </div>
+						                            </div>
+						                        </div>
+						
+						                    </div>
+						                </div>
+					                {{/if}}
+						        </div>
+			                {{/if}}
+			           {{/unless}}
+		            </div>
+
+		            <div class="col-md-5">
+		                <div class="cp-opener-panel panel panel-default">
+		                    <div class="panel-heading cp-opener-list-header">
+		                        <h4 class="panel-title text-center">About this Assessment</h4>
+		                    </div>
+		                    <ul class="list-group cp-opener-list">
+		                        <li class="list-group-item cp-opener-list-item"><span class ="cp-opener-scoreMethod">{{scoreMethod}}</span></li>
+		                        <li class="list-group-item cp-opener-list-item"> <img class="list-group-img" src="images/icons/Time_Icon.svg" alt="clock with hands"/>
+		                            <span class="cp-opener-estimatedTime">{{estimatedTime}}</span>
+		                            <span class ="cp-opener-minute" style="font-size:20px;">minutes</span><p>Estimated</p><p>Time</p>
+		                        </li>
+		                        <li class="list-group-item cp-opener-list-item"> <img class="list-group-img" src="images/icons/Points_Icon.svg" alt="star"/>
+		                            <span class ="cp-opener-totalPoints">{{totalPoints}}</span> <p>Total<p><p>Points</p>
+		                        </li>
+		                        <li class="list-group-item cp-opener-list-item"> <img class="list-group-img" src="images/icons/Questions_Icon.svg" alt="speech balloon"/>
+		                            <span class ="cp-opener-totalQuestions">{{totalQuestions}}</span> <p>Questions</p>
+		                        </li>
+		                    </ul>
+		                </div>
+						{{#if isPreviewMode}}
+			                <div class="attempt-opener begin-button-wrapper">
+			                     <button type="button" class="teacher-preview-button btn btn-lg btn-primary" title="Select to Teacher Preview Mode">Teacher Preview Mode</button>
+			                </div>
+			            {{else}}
+							{{#if isAlreadyTaken}}
+				                <div class="attempt-opener begin-button-wrapper">
+				                     <button type="button" class="retake-button btn btn-lg btn-primary" title="Select to retake the assessment">Retake Assessment</button>
+				                </div>
+				            {{else}}
+				                <div class="normal-opener begin-button-wrapper">
+				                    <button type="button" class="begin-button btn btn-lg btn-primary" title="Select to begin the assessment">Begin Assessment</button>
+				                </div>
+							{{/if}}
+						{{/if}}
+		            </div>  
+        </div>
+    </div>
+
+</div>
+<!-- end of assessment.opener.view.handlebars -->
